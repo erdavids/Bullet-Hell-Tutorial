@@ -5,29 +5,23 @@ onready var bullet_scene = load("res://Scenes/Bullet.tscn")
 
 onready var player = get_parent().get_parent().get_node("Player")
 
-var HEALTH = 6
-
 var type = "ENEMY"
 
 func _ready():
-	$Timer.set_wait_time(rand_range(.5, 1.5))
+	$Timer.set_wait_time(2)
 	$Timer.start()
 	
 	var target = Vector2(position.x, 100)
-	$Move_Tween.interpolate_property(self, "position", position, target, 1, Tween.TRANS_QUINT, Tween.EASE_OUT)
+	$Move_Tween.interpolate_property(self, "position", position, target, 2, Tween.TRANS_QUINT, Tween.EASE_OUT)
 	$Move_Tween.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotate(3 * delta)
-	position.y += 200 * delta
+	rotate(1 * delta)
+	position.y += 50 * delta
 	
-	if (HEALTH <= 0):
-		get_parent().remove_child(self)
-		queue_free()
-	
-	elif (position.y > get_viewport_rect().size.y + 20):
+	if (position.y > get_viewport_rect().size.y + 20):
 		get_parent().remove_child(self)
 		queue_free()
 	

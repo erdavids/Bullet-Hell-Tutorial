@@ -23,6 +23,3 @@ __meta__ = {
 
 [node name="EnemySpawn" type="Node2D" parent="."]
 script = ExtResource( 3 )
-
-[node name="Timer" type="Timer" parent="EnemySpawn"]
-[connection signal="timeout" from="EnemySpawn/Timer" to="EnemySpawn" method="_on_Timer_timeout"]

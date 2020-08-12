@@ -13,10 +13,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	self.position += dir * delta * bullet_speed
-	
-	#var t = delta * 0.8
-	#bullet_speed = bullet_speed + (final_speed - bullet_speed) * t
-	
+
 	if ($RayCast2D.is_colliding()):
 		var collid = $RayCast2D.get_collider().get_parent()
 		if (collid.type == "PLAYER"):
