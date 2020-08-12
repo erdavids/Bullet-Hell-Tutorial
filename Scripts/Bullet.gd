@@ -1,10 +1,9 @@
 extends Node2D
 
+var dir = Vector2(1, 0)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export var bullet_speed = 1
+export var final_speed = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +12,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.position += Vector2(1, 0).rotated(self.rotation)
+	self.position += dir * delta * bullet_speed
+	
+	#var t = delta * 0.8
+	#bullet_speed = bullet_speed + (final_speed - bullet_speed) * t
 	
 	if ($RayCast2D.is_colliding()):
-		print("Hit!")
+		var collid = $RayCast2D.get_collider().get_parent()
+		if (collid.type == "PLAYER"):
+			position += Vector2(2000, 2000)
+		
+
+
+func screen_exited():
+	get_parent().remove_child(self)
+	queue_free()
